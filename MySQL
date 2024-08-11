@@ -1,0 +1,28 @@
+docker pull mysql
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+pip install mysql-connector-python
+pip install PyMySQL
+import mysql.connector
+
+# Establish connection
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="your_password",
+    database="your_database"
+)
+
+# Create a cursor object
+cursor = conn.cursor()
+
+# Execute a query
+cursor.execute("SELECT * FROM your_table")
+
+# Fetch results
+results = cursor.fetchall()
+for row in results:
+    print(row)
+
+# Close the connection
+cursor.close()
+conn.close()
